@@ -1,0 +1,35 @@
+{
+  "name": "neo-lang",
+  "displayName": "neo-lang",
+  "publisher": "neo-lang-org",
+  "description": "Syntax highlighting for the Neo programming language.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.71.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "neo",
+        "aliases": [
+          "Neo",
+          "neo"
+        ],
+        "extensions": [
+          ".neo"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "neo",
+        "scopeName": "source.neo",
+        "path": "./syntaxes/neo.tmLanguage.json"
+      }
+    ]
+  }
+}
