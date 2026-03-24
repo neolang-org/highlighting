@@ -124,6 +124,11 @@
           "name": "keyword.operator.range.neo"
         },
         {
+          "comment": "Compile-time concatenation operator",
+          "match": "##",
+          "name": "keyword.operator.concatenation.neo"
+        },
+        {
           "comment": "Wrapping arithmetic operators",
           "match": "(%\\+\\+|%--|%\\+=|%-=|%\\*=|%/=|%\\+|%-|%\\*|%/)",
           "name": "keyword.operator.arithmetic.wrapping.neo"
