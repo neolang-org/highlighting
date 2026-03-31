@@ -1,0 +1,13 @@
+{
+  "name": "tree-sitter-neo",
+  "module": "index.ts",
+  "main": "bindings/node",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest",
+    "tree-sitter-cli": "^0.26.6"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

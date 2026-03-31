@@ -1,0 +1,211 @@
+================================================================================
+Range expression with no spaces
+================================================================================
+
+fn foo() {
+    r := 0..<10;
+    s := 1..=5;
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    (parameter_list)
+    body: (block
+      (shorthand_variable_declaration
+        name: (identifier)
+        value: (range_expression
+          start: (number_literal)
+          end: (number_literal)))
+      (shorthand_variable_declaration
+        name: (identifier)
+        value: (range_expression
+          start: (number_literal)
+          end: (number_literal))))))
+
+================================================================================
+Slice expression
+================================================================================
+
+fn foo() {
+    s := arr[1..=3];
+    t := arr[0..<5];
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    (parameter_list)
+    body: (block
+      (shorthand_variable_declaration
+        name: (identifier)
+        value: (slice_expression
+          object: (identifier)
+          start: (number_literal)
+          end: (number_literal)))
+      (shorthand_variable_declaration
+        name: (identifier)
+        value: (slice_expression
+          object: (identifier)
+          start: (number_literal)
+          end: (number_literal))))))
+
+================================================================================
+Ternary expression
+================================================================================
+
+fn foo() {
+    x := true ? 1 : 0;
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    (parameter_list)
+    body: (block
+      (shorthand_variable_declaration
+        name: (identifier)
+        value: (ternary_expression
+          condition: (boolean_literal)
+          consequence: (number_literal)
+          alternative: (number_literal))))))
+
+================================================================================
+Null coalesce expression
+================================================================================
+
+fn foo() {
+    x := opt ?? 0;
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    (parameter_list)
+    body: (block
+      (shorthand_variable_declaration
+        name: (identifier)
+        value: (null_coalesce_expression
+          left: (identifier)
+          right: (number_literal))))))
+
+================================================================================
+Pointer operations
+================================================================================
+
+fn foo() {
+    p := &x;
+    val := p^;
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    (parameter_list)
+    body: (block
+      (shorthand_variable_declaration
+        name: (identifier)
+        value: (address_of_expression
+          operand: (identifier)))
+      (shorthand_variable_declaration
+        name: (identifier)
+        value: (dereference_expression
+          operand: (identifier))))))
+
+================================================================================
+Tuple expression
+================================================================================
+
+fn foo() {
+    t := .{1, "hello", true};
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    (parameter_list)
+    body: (block
+      (shorthand_variable_declaration
+        name: (identifier)
+        value: (tuple_expression
+          (number_literal)
+          (string_literal
+            (string_content))
+          (boolean_literal))))))
+
+================================================================================
+Lambda expression
+================================================================================
+
+fn foo() {
+    bar ::= fn(): int {
+        return 12;
+    };
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    (parameter_list)
+    body: (block
+      (shorthand_constant_declaration
+        name: (identifier)
+        value: (lambda_expression
+          (parameter_list)
+          return_type: (primitive_type)
+          body: (block
+            (return_statement
+              value: (number_literal))))))))
+
+================================================================================
+Number literals
+================================================================================
+
+fn foo() {
+    hex := 0xFF;
+    bin := 0b1010;
+    oct := 0q72;
+    big := 1_000_000;
+    flt := 3.14;
+    f32_val := 3.14f;
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    (parameter_list)
+    body: (block
+      (shorthand_variable_declaration
+        name: (identifier)
+        value: (number_literal))
+      (shorthand_variable_declaration
+        name: (identifier)
+        value: (number_literal))
+      (shorthand_variable_declaration
+        name: (identifier)
+        value: (number_literal))
+      (shorthand_variable_declaration
+        name: (identifier)
+        value: (number_literal))
+      (shorthand_variable_declaration
+        name: (identifier)
+        value: (number_literal))
+      (shorthand_variable_declaration
+        name: (identifier)
+        value: (number_literal)))))

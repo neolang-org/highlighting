@@ -1,0 +1,158 @@
+================================================================================
+Variable declarations
+================================================================================
+
+mut x: int = 12;
+mut y = 42;
+mut z: f64;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (variable_declaration
+    name: (identifier)
+    type: (primitive_type)
+    value: (number_literal))
+  (variable_declaration
+    name: (identifier)
+    value: (number_literal))
+  (variable_declaration
+    name: (identifier)
+    type: (primitive_type)))
+
+================================================================================
+Constant declarations
+================================================================================
+
+const PI = 3.14;
+const MAX: int = 100;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (constant_declaration
+    name: (identifier)
+    value: (number_literal))
+  (constant_declaration
+    name: (identifier)
+    type: (primitive_type)
+    value: (number_literal)))
+
+================================================================================
+Shorthand variable declaration
+================================================================================
+
+x := 12;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (shorthand_variable_declaration
+    name: (identifier)
+    value: (number_literal)))
+
+================================================================================
+Shorthand constant declaration
+================================================================================
+
+y ::= 3.14;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (shorthand_constant_declaration
+    name: (identifier)
+    value: (number_literal)))
+
+================================================================================
+Discard variable
+================================================================================
+
+_ := 0;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (shorthand_variable_declaration
+    value: (number_literal)))
+
+================================================================================
+Function declaration
+================================================================================
+
+fn add(a, b: int): int {
+    return a + b;
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    (parameter_list
+      (parameter
+        name: (identifier))
+      (parameter
+        name: (identifier)
+        type: (primitive_type)))
+    return_type: (primitive_type)
+    body: (block
+      (return_statement
+        value: (binary_expression
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+Function with no return type
+================================================================================
+
+fn say_hi(name: string) {
+    fmt::println("Hi", name);
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    (parameter_list
+      (parameter
+        name: (identifier)
+        type: (primitive_type)))
+    body: (block
+      (expression_statement
+        (call_expression
+          function: (qualified_identifier
+            namespace: (identifier)
+            name: (identifier))
+          (argument
+            (string_literal
+              (string_content)))
+          (argument
+            (identifier)))))))
+
+================================================================================
+Function overloads
+================================================================================
+
+fn pow overloads {powi, powf}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_overload_declaration
+    name: (identifier)
+    (identifier)
+    (identifier)))
+
+================================================================================
+Operator overloads
+================================================================================
+
+operator + overloads { add_points }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (operator_overload_declaration
+    (identifier)))

@@ -1,0 +1,333 @@
+================================================================================
+C-style for loop with mut
+================================================================================
+
+fn foo() {
+    for mut i = 0; i < 10; ++i {
+    }
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    (parameter_list)
+    body: (block
+      (for_c_statement
+        init_name: (identifier)
+        init_value: (number_literal)
+        condition: (binary_expression
+          left: (identifier)
+          right: (number_literal))
+        update: (increment_expression
+          operand: (identifier))
+        body: (block)))))
+
+================================================================================
+C-style for loop with shorthand
+================================================================================
+
+fn foo() {
+    for i := 0; i < 10; ++i {
+    }
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    (parameter_list)
+    body: (block
+      (for_c_shorthand_statement
+        init_name: (identifier)
+        init_value: (number_literal)
+        condition: (binary_expression
+          left: (identifier)
+          right: (number_literal))
+        update: (increment_expression
+          operand: (identifier))
+        body: (block)))))
+
+================================================================================
+For-in loop with range
+================================================================================
+
+fn foo() {
+    for const i in 0 ..< 10 {
+    }
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    (parameter_list)
+    body: (block
+      (for_in_statement
+        binding: (identifier)
+        iterable: (range_expression
+          start: (number_literal)
+          end: (number_literal))
+        body: (block)))))
+
+================================================================================
+For-in loop with collection
+================================================================================
+
+fn foo() {
+    for const str in strings {
+    }
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    (parameter_list)
+    body: (block
+      (for_in_statement
+        binding: (identifier)
+        iterable: (identifier)
+        body: (block)))))
+
+================================================================================
+For range loop (bare)
+================================================================================
+
+fn foo() {
+    for 0 ..< 10 {
+    }
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    (parameter_list)
+    body: (block
+      (for_range_statement
+        range: (range_expression
+          start: (number_literal)
+          end: (number_literal))
+        body: (block)))))
+
+================================================================================
+Reverse for-in loop
+================================================================================
+
+fn foo() {
+    for <- const i in 0 ..< 10 {
+    }
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    (parameter_list)
+    body: (block
+      (for_in_statement
+        binding: (identifier)
+        iterable: (range_expression
+          start: (number_literal)
+          end: (number_literal))
+        body: (block)))))
+
+================================================================================
+If-elif-else
+================================================================================
+
+fn foo() {
+    if x > 0 {
+        a();
+    } elif x == 0 {
+        b();
+    } else {
+        c();
+    }
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    (parameter_list)
+    body: (block
+      (if_statement
+        condition: (binary_expression
+          left: (identifier)
+          right: (number_literal))
+        consequent: (block
+          (expression_statement
+            (call_expression
+              function: (identifier))))
+        (elif_clause
+          condition: (binary_expression
+            left: (identifier)
+            right: (number_literal))
+          body: (block
+            (expression_statement
+              (call_expression
+                function: (identifier)))))
+        (else_clause
+          body: (block
+            (expression_statement
+              (call_expression
+                function: (identifier)))))))))
+
+================================================================================
+Single-line if
+================================================================================
+
+fn foo() {
+    if x > 10: return;
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    (parameter_list)
+    body: (block
+      (if_statement
+        condition: (binary_expression
+          left: (identifier)
+          right: (number_literal))
+        consequent: (return_statement)))))
+
+================================================================================
+While loop
+================================================================================
+
+fn foo() {
+    while x > 0 {
+        x = x - 1;
+    }
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    (parameter_list)
+    body: (block
+      (while_statement
+        condition: (binary_expression
+          left: (identifier)
+          right: (number_literal))
+        body: (block
+          (assignment_statement
+            left: (identifier)
+            right: (binary_expression
+              left: (identifier)
+              right: (number_literal))))))))
+
+================================================================================
+When statement
+================================================================================
+
+fn foo() {
+    when x {
+        1: a();
+        2, 3: b();
+        else: c();
+    }
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    (parameter_list)
+    body: (block
+      (when_statement
+        subject: (identifier)
+        (when_case
+          (when_pattern
+            (number_literal))
+          (expression_statement
+            (call_expression
+              function: (identifier))))
+        (when_case
+          (when_pattern
+            (number_literal))
+          (when_pattern
+            (number_literal))
+          (expression_statement
+            (call_expression
+              function: (identifier))))
+        (when_case
+          (expression_statement
+            (call_expression
+              function: (identifier))))))))
+
+================================================================================
+Test block
+================================================================================
+
+test "addition" {
+    assert(add(1, 2) == 3);
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (test_block
+    name: (string_literal
+      (string_content))
+    body: (block
+      (assert_statement
+        condition: (binary_expression
+          left: (call_expression
+            function: (identifier)
+            (argument
+              (number_literal))
+            (argument
+              (number_literal)))
+          right: (number_literal))))))
+
+================================================================================
+Skip test
+================================================================================
+
+skip test "skipped" {
+    assert(true);
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (test_block
+    name: (string_literal
+      (string_content))
+    body: (block
+      (assert_statement
+        condition: (boolean_literal)))))
+
+================================================================================
+Test skip
+================================================================================
+
+test skip "also skipped" {
+    assert(true);
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (test_block
+    name: (string_literal
+      (string_content))
+    body: (block
+      (assert_statement
+        condition: (boolean_literal)))))

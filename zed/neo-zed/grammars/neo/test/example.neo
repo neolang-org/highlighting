@@ -1,0 +1,133 @@
+namespace main;
+
+#import fmt;
+#import math as M;
+#import "foo::bar";
+
+// Variables
+mut x: int = 12;
+mut y = 42;
+x := 12;
+y ::= 3.14;
+const PI = 3.14159;
+mut z: f64;
+
+// Functions
+fn add(a, b: int): int {
+    return a + b;
+}
+
+fn say_hi(name: string) {
+    fmt::println("Hi", name);
+}
+
+// Overloads
+fn powi(x: int, y: int): int { return x; }
+fn powf(x: float, y: float): float { return x; }
+fn pow overloads {powi, powf}
+
+// Typedefs
+typedef Custom as int;
+
+typedef Point struct {
+    x: int;
+    y: int;
+}
+
+typedef Color enum {
+    Red,
+    Green,
+    Blue,
+}
+
+typedef Value as bool | int | string;
+
+typedef File_Error error {
+    Not_Found,
+    Access_Denied,
+}
+
+// Control flow
+fn control_flow() {
+    if x > 0 {
+        fmt::println("positive");
+    } elif x == 0 {
+        fmt::println("zero");
+    } else {
+        fmt::println("negative");
+    }
+
+    if x > 10: return;
+
+    while x > 0 {
+        x = x - 1;
+    }
+
+    for i := 0; i < 10; ++i {
+        fmt::println(i);
+    }
+
+    for const i in 0 ..< 10 {
+        fmt::println(i);
+    }
+
+    for const str in strings {
+        fmt::println(str);
+    }
+}
+
+// Struct usage
+fn use_structs() {
+    p := Point{x: 10, y: 20};
+    fmt::println(p.x);
+    point := Point{};
+}
+
+// Pointers
+fn use_pointers() {
+    mut p: ^int;
+    x := 12;
+    p = &x;
+}
+
+// Test block
+test "addition" {
+    assert(add(1, 2) == 3);
+}
+
+// Attributes
+#[inline]
+fn fast_fn(): int {
+    return 42;
+}
+
+// Defer
+fn with_defer() {
+    mut resource = 0;
+    defer resource = 0;
+}
+
+// Ternary
+fn ternary_example() {
+    x := true ? 1 : 0;
+}
+
+// Ranges
+fn range_example() {
+    r := 1 ..= 10;
+}
+
+// Lambda
+fn lambda_example() {
+    bar ::= fn(): int {
+        return 12;
+    };
+}
+
+// Compile-time
+#define DEBUG_MODE
+#set MAX_SIZE 4096
+
+#if(debug) {
+    mut debug_var = true;
+}

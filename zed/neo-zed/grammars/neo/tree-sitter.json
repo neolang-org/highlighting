@@ -1,0 +1,41 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "neo",
+      "camelcase": "Neo",
+      "title": "Neo",
+      "scope": "source.neo",
+      "file-types": [
+        "neo"
+      ],
+      "injection-regex": "^neo$",
+      "class-name": "TreeSitterNeo"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Tree sitter grammar for the Neo programming language.",
+    "authors": [
+      {
+        "name": "Skyler Burwell",
+        "url": ""
+      }
+    ],
+    "links": {
+      "repository": "https://codeberg.org/neolang/neo",
+      "funding": ""
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "java": false,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}

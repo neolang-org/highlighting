@@ -1,0 +1,424 @@
+namespace main;
+
+// Imports
+#import fmt;
+#import math as M;
+#import "foo::bar";
+#import using fmt;
+#import { PI, sin, cos } from math;
+
+// Variables
+mut x: int = 12;
+mut y = 42;
+x := 12;
+y ::= 3.14;
+const PI = 3.14159;
+mut z: f64;
+_ := 0;
+
+// Functions
+fn add(a, b: int): int {
+    return a + b;
+}
+
+fn say_hi(name: string) {
+    fmt::println("Hi", name);
+}
+
+fn greet(name: string = "World"): string {
+    return name;
+}
+
+fn increment(mut x: int): int {
+    x += 1;
+    return x;
+}
+
+fn divide(a, b: int): .{int, int} {
+    return .{a / b, a % b};
+}
+
+fn sum(nums: ..int): int {
+    return 0;
+}
+
+fn cosf64(f64): f64 undefined;
+
+// Overloads
+fn powi(x: int, y: int): int { return x; }
+fn powf(x: float, y: float): float { return x; }
+fn pow overloads {powi, powf}
+
+// Operator overloads
+operator + overloads { add_points }
+
+// Typedefs
+typedef Custom as int;
+
+typedef Point struct {
+    x: int;
+    y: int;
+}
+
+typedef Player struct {
+    ...Entity;
+    health: int;
+    name: string;
+    alive: bool = true;
+}
+
+typedef Flags struct {
+    enabled: bool : 1;
+    priority: u8 : 3;
+}
+
+typedef Color enum {
+    Red,
+    Green,
+    Blue,
+}
+
+typedef Status enum: u8 {
+    Active = 1,
+    Inactive = 2,
+}
+
+typedef Value as bool | int | string;
+
+typedef Data union {
+    i: int;
+    f: f32;
+    bytes: [4]u8;
+}
+
+typedef File_Error error {
+    Not_Found,
+    Access_Denied,
+}
+
+// Generics
+fn max(a, b: $T): T {
+    return a > b ? a : b;
+}
+
+typedef Pair struct<$T, $U> {
+    first: T;
+    second: U;
+}
+
+// Control flow
+fn control_flow() {
+    if x > 0 {
+        fmt::println("positive");
+    } elif x == 0 {
+        fmt::println("zero");
+    } else {
+        fmt::println("negative");
+    }
+
+    if x > 10: return;
+
+    while x > 0 {
+        x = x - 1;
+    }
+
+    until done {
+        process();
+    }
+
+    // C-style for loops
+    for mut i = 0; i < 10; ++i {
+        fmt::println(i);
+    }
+
+    for i := 0; i < 10; ++i {
+        fmt::println(i);
+    }
+
+    // Range for loops
+    for 0 ..< 10 {
+    }
+
+    for const i in 0 ..< 10 {
+        fmt::println(i);
+    }
+
+    for const i in 0 ..= 10; 2 {
+    }
+
+    for const str in strings {
+        fmt::println(str);
+    }
+
+    for const str, index in strings {
+        fmt::println(str);
+    }
+
+    for <- const i in 0 ..< 10 {
+    }
+
+    // Single-line forms
+    for const i in 0..<10: fmt::println(i);
+
+    // When statement
+    when x {
+        1: fmt::println("one");
+        2, 3: fmt::println("two or three");
+        in 0 ..< 10: fmt::println("range");
+        else: fmt::println("other");
+    }
+
+    // When with blocks
+    when x {
+        1: {
+            fmt::println("one");
+            fmt::println("!");
+        }
+        else: fmt::println("other");
+    }
+
+    // When as expression
+    result := when x {
+        1: yields "one";
+        2: yields "two";
+        else: yields "unknown";
+    };
+
+    // Ternary
+    val := true ? 1 : 0;
+
+    // Labels and goto
+    some_label:
+    goto some_label;
+
+    // Break and continue with labels
+    outer:
+    for i := 0; i < 100; ++i {
+        break outer;
+        continue outer;
+    }
+}
+
+// Struct usage
+fn use_structs() {
+    p := Point{x: 10, y: 20};
+    fmt::println(p.x);
+    point := Point{};
+    q := Point{10, 20};
+}
+
+// Pointers
+fn use_pointers() {
+    mut p: ^int;
+    x := 12;
+    p = &x;
+    val := p^;
+}
+
+// Optionals and results
+fn optional_example(x: int?): int {
+    return x ?? 0;
+}
+
+fn result_example(): int! {
+    return 42;
+}
+
+// Test blocks
+test "addition" {
+    assert(add(1, 2) == 3);
+}
+
+test {
+    assert(true);
+}
+
+skip test "skipped" {
+    assert(false);
+}
+
+test skip "also skipped" {
+    assert(false);
+}
+
+// Attributes
+#[inline]
+fn fast_fn(): int {
+    return 42;
+}
+
+// Defer
+fn with_defer() {
+    mut resource = 0;
+    defer resource = 0;
+    defer {
+        resource = 0;
+    }
+    defer_err resource = 0;
+}
+
+// Ranges
+fn range_example() {
+    r := 1 ..= 10;
+    s := 0 ..< 5;
+}
+
+// Lambda
+fn lambda_example() {
+    bar ::= fn(): int {
+        return 12;
+    };
+    add ::= fn(a, b: int): int {
+        return a + b;
+    };
+}
+
+// Cast expressions
+fn cast_example() {
+    x := cast(y, int);
+    z := recast(y, f32);
+    w := auto_cast(y);
+    f := f64(my_int);
+}
+
+// Intrinsics
+fn intrinsic_example() {
+    s := size_of(int);
+    a := align_of(int);
+    t := type_of(x);
+    n := typename_of(int);
+}
+
+// Compile-time
+#define DEBUG_MODE
+#set MAX_SIZE 4096
+
+#if(debug) {
+    mut debug_var = true;
+}
+
+// Block expressions
+fn block_expr_example() {
+    result := blk: {
+        x := compute();
+        yields blk x;
+    };
+}
+
+// Array init
+fn array_example() {
+    arr := [5]int{1, 2, 3, 4, 5};
+    dyn := []int{1, 2, 3};
+}
+
+// Map init
+fn map_example() {
+    m := [string: int]{"a": 1, "b": 2};
+}
+
+// Tuple
+fn tuple_example() {
+    t := .{1, "hello", true};
+}
+
+// Spread
+fn spread_example() {
+    foo(...args);
+}
+
+// Extern
+extern "libc" {
+    fn printf(fmt: cstring, #c_varargs): int;
+}
+
+// Try expression
+fn try_example(): int! {
+    val := try other_func();
+    return val;
+}
+
+// Saturating and wrapping operators
+fn overflow_ops() {
+    x := a @+ b;
+    y := a %* b;
+    z @+= 1;
+    w %-= 1;
+}
+
+// Assert
+fn assert_example() {
+    assert(x > 0);
+    assert(x > 0, "x must be positive");
+}
+
+// Push context
+fn context_example() {
+    push_context new_ctx {
+        do_something();
+    }
+}
+
+// Payload capture
+fn payload_example() {
+    if opt => [const v] {
+        use(v);
+    }
+}
+
+// Type assertions
+fn type_assert_example() {
+    x := val as int;
+    y := val as int else 0;
+}
+
+// Null coalesce
+fn null_coalesce_example() {
+    x := opt ?? default_val;
+    opt ??= new_val;
+}
+
+// Optional chaining
+fn optional_chain_example() {
+    x := obj?.field;
+}
+
+// Else expression
+fn else_example() {
+    x := opt else 0;
+    y := opt else {
+        yields 0;
+    };
+}
+
+// Compile time run
+fn comptime_example() {
+    result ::= #run compute();
+}
+
+// Slice expression
+fn slice_example() {
+    s := arr[1..=3];
+    t := arr[0..<5];
+}
+
+// Number literals
+fn number_literals() {
+    hex := 0xFF;
+    bin := 0b1010;
+    oct := 0q72;
+    big := 1_000_000;
+    flt := 3.14;
+    f32_val := 3.14f;
+}
+
+// String and char literals
+fn string_literals() {
+    s := "hello\nworld";
+    r := `raw\string`;
+    c := 'a';
+    esc := '\n';
+}
+
+// Comments
+// This is a line comment
+/- This is a block comment -/

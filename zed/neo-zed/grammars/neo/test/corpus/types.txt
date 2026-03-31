@@ -1,0 +1,127 @@
+================================================================================
+Typedef alias
+================================================================================
+
+typedef Custom as int;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (typedef_declaration
+    name: (type_identifier)
+    (typedef_alias
+      type: (primitive_type))))
+
+================================================================================
+Struct definition
+================================================================================
+
+typedef Point struct {
+    x: int;
+    y: int;
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (typedef_declaration
+    name: (type_identifier)
+    (struct_definition
+      (struct_field
+        name: (identifier)
+        type: (primitive_type))
+      (struct_field
+        name: (identifier)
+        type: (primitive_type)))))
+
+================================================================================
+Enum definition
+================================================================================
+
+typedef Color enum {
+    Red,
+    Green,
+    Blue,
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (typedef_declaration
+    name: (type_identifier)
+    (enum_definition
+      (enum_variant
+        name: (identifier))
+      (enum_variant
+        name: (identifier))
+      (enum_variant
+        name: (identifier)))))
+
+================================================================================
+Tagged union type
+================================================================================
+
+typedef Value as bool | int | string;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (typedef_declaration
+    name: (type_identifier)
+    (typedef_alias
+      type: (union_type
+        left: (union_type
+          left: (primitive_type)
+          right: (primitive_type))
+        right: (primitive_type)))))
+
+================================================================================
+Error definition
+================================================================================
+
+typedef File_Error error {
+    Not_Found,
+    Access_Denied,
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (typedef_declaration
+    name: (type_identifier)
+    (error_definition
+      (error_variant
+        name: (identifier))
+      (error_variant
+        name: (identifier)))))
+
+================================================================================
+Struct init expression
+================================================================================
+
+fn foo() {
+    p := Point{x: 10, y: 20};
+    q := Point{};
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    (parameter_list)
+    body: (block
+      (shorthand_variable_declaration
+        name: (identifier)
+        value: (struct_init_expression
+          type: (type_identifier)
+          (struct_init_field
+            name: (identifier)
+            value: (number_literal))
+          (struct_init_field
+            name: (identifier)
+            value: (number_literal))))
+      (shorthand_variable_declaration
+        name: (identifier)
+        value: (struct_init_expression
+          type: (type_identifier))))))
